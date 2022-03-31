@@ -1,0 +1,42 @@
+# Imports
+from netmiko import ConnectHandler
+from datetime import date
+from pprint import pprint
+
+
+# Inputs
+with open("MYIPS_FILE", "r") as f:
+    iplist = f.read().splitlines()
+
+devices = []
+for ip in iplist:
+    if ip.strip():
+        devices.append(
+            {
+                "device_type": "cisco_ios_telnet",
+                "ip": ip.strip(),
+                "username": "alhussien",
+                "password": "cisco",
+                "secret": "cisco",
+                "session_log": f"{ip.strip()}_ session.log",
+                "fast_cli": False,
+                "conn_timeout": 5.0,
+            },
+        )
+# Processing Inputs
+for device in devices:
+    try:
+        print(f"Trying {device['ip']}...")
+        with ConnectHandler(**device) as net_conn:
+            print(f"Connected to {device['ip']}")
+            hostname = net_conn.find_prompt()[:-1]
+            output = net_conn.send_config_from_file(
+                "commands",
+                enter_config_mode=False,
+            )
+        # Output
+        with open(f"{hostname}_{date.today()}.txt", "w") as f:
+            f.write(output)
+        print(f"Saved backup file for {device['ip']}", end="\n\n")
+    except Exception:
+        print(f"!! could not connect to device with IP: {device['ip']}!!", end="\n\n")
