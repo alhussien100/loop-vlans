@@ -1,0 +1,15 @@
+sudo apt-get update
+sudo apt-get update -y
+sudo apt-get install -y python-netmiko
+sudo apt install python3-pandas
+sudo apt install python-pandas-doc
+
+
+
+
+pip install netmiko --user
+pip install pandas --user
+
+
+
+
