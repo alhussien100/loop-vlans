@@ -17,7 +17,7 @@ for device in devices:
             print(f"Connected to {device['ip']}")
             details = net_conn.send_command("show version", use_textfsm=True)
             details[0].update({"ip": device["ip"]})
-            date.extend(details)
+            data.extend(details)
             print(f"Finished For{device['ip']}", end="\n\n")
 
     except IndentationError:
