@@ -1,0 +1,42 @@
+hostnamectl      details about my OS and Computer name
+cd /			exit from one shell to previous one
+cd + dev			get in to specefic folder
+clear
+nano python.py
+ifconfig
+unzip + cpmpress file name
+sudo -i                  getout from alhussien user to root user
+man sudo
+sudo apt-get purge
+sudo apt-get autoremove
+sudo apt install
+sudp apt remove 
+sudo apt update
+sudo apt upgrade
+sudo apt install + app name
+sudo bash + app name .bundle
+cat  + file name           show the content of any file
+touch file1.txt           to create a file
+stat  file1.txt           detalis like size of the file
+mkdir                     will make a directory in your pwd
+rm                        to remove the specific file from a directory
+cp                        to copy any file or folder to any directory
+mv                        to move files around the computer
+uname -a                   to get the release number, version of Linux, and much more
+wget                      to download the content from the internet
+gzip file1.txt              to convert your files to zip archive
+hostname
+w                          will display the user details that are currently logged into the system
+sudo useradd MIKE          if you want to add another user to your system
+sudo userdel MIKE          to delete the user
+passwd adnan               change the password of your Ubuntu user
+top                        processing cpu ++
+
+
+
+
+
+
+
+
+
