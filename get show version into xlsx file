@@ -1,0 +1,50 @@
+# Import
+
+from pprint import pprint
+import pandas as pd
+from netmiko import ConnectHandler as CH
+from datetime import date
+
+# Inputs
+
+devices = pd.read_csv("devices.csv").fillna("").to_dict(orient="records")
+wb = pd.ExcelWriter(f"device_details_{date.today()}.xlsx")
+data = []
+for device in devices:
+    try:
+        print(f"Trying {device['ip']}...")
+        with CH(**device) as net_conn:
+            print(f"Connected to {device['ip']}")
+            details = net_conn.send_command("show version", use_textfsm=True)
+            details[0].update({"ip": device["ip"]})
+            date.extend(details)
+            print(f"Finished For{device['ip']}", end="\n\n")
+
+    except IndentationError:
+        print(f"!! could not connect to device with IP: {device['ip']}!!", end="\n\n")
+
+# Output
+df = pd.DataFrame(data)
+df.to_excel(
+    wb,
+    index=False,
+    columns=[
+        "hosname",
+        "ip" "serial",
+        "hardware",
+        "version",
+        "config_register",
+        "uptime",
+        "reload_reason",
+    ],
+    header=[
+        "Device_Hostname",
+        "MGMT IP" "The Serial",
+        "Platform ID",
+        "SW Version",
+        "Conf Reg",
+        "Uptime",
+        "Last Reload Reason",
+    ],
+)
+wb.save()
